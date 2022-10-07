@@ -7,7 +7,7 @@ Happy contributing to our repository under Hacktoberfest '22.
 This repository is under GDSC Aliah for all participants to get a good grasp of open source and how to work among others. In this repository there will be only beginner level contributions so as to get the participants started.
 <br>
 
-<h1 align="center">Google Developer Student Clubs - Aliah</h1>
+<h1 align="center">Google Developers Student Club - Aliah</h1>
 
 ![image](https://res.cloudinary.com/startup-grind/image/upload/c_fill,dpr_2,f_auto,g_center,h_540,q_auto:good,w_720/v1/gcs/platform-data-dsc/chapter_photos/Aliah-University-Admission.jpg)
 
