@@ -10,9 +10,8 @@ This repository is under GDSC Aliah for their participants to get a good grasp o
 
 At GDSC Aliah, we will be introducing students to all the ins and outs of the IT field and also introduce them to the new technologies and its applications. We are aiming towards improvements of the members of this club and also hoping they would be benefiting in their growth and personal development along with having guidance and mentorship throughout their journey.
 
-<h3 align="center">Links</h3>
-**Visit our GDSC Website: **https://gdsc.community.dev/aliah-university-kolkata/
-**Twitter: ** https://twitter.com/GDSCAliah
-**LinkedIn: ** https://www.linkedin.com/company/gdsc-aliah/
-**Instagram: ** https://www.instagram.com/https://www.instagram.com/gdscaliah/
-<br>
+<h2 align="center">Links</h3>
+<h3>Visit our GDSC Website: </h3>https://gdsc.community.dev/aliah-university-kolkata/
+<h3>Twitter: </h3> https://twitter.com/GDSCAliah
+<h3>LinkedIn: </h3> https://www.linkedin.com/company/gdsc-aliah/
+<h3>Instagram: </h3>https://www.instagram.com/https://www.instagram.com/gdscaliah/
