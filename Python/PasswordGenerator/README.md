@@ -1,4 +1,4 @@
-This is a password generator script in which you can tell how many passwords you would like to generate as well as the length for each password. 
+This is a password generator script that allows you to specify the number of passwords to generate as well as the length of each password.
 
-Here is a screenshot of the results for 3 passwords of 10 length each.
-![Screenshot from 2022-10-07 16-53-46](https://user-images.githubusercontent.com/56537214/194542334-e329bcdc-1608-431e-b2af-0e38854ab277.png)
+Here is a screenshot of the results for three passwords of ten characters each.
+![image](https://user-images.githubusercontent.com/59412623/194580299-ac43c1b0-8091-4474-b45a-0a965fc356f3.png)
