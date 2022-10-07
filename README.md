@@ -14,4 +14,4 @@ At GDSC Aliah, we will be introducing students to all the ins and outs of the IT
 <h3>Visit our GDSC Website: </h3>https://gdsc.community.dev/aliah-university-kolkata/
 <h3>Twitter: </h3> https://twitter.com/GDSCAliah
 <h3>LinkedIn: </h3> https://www.linkedin.com/company/gdsc-aliah/
-<h3>Instagram: </h3>https://www.instagram.com/https://www.instagram.com/gdscaliah/
+<h3>Instagram: </h3>https://www.instagram.com/gdscaliah/
