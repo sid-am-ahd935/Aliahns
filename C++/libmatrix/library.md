@@ -16,7 +16,7 @@ int cols
 ```
 
 ## Overloaded operators
- - `+` Adds to matrices
+ - `+` Adds 2 matrices
  - `-` Subtracts 2nd from 1st matrix
  - `*` Multiplies a matrix with a scalar or another matrix
  - `^` Calculates power (+ve integer) of a matrix
