@@ -1,0 +1,2 @@
+Rock, Paper, Scissor game in python
+This is a CLI mode of our childhood beloved rock, paper, scissor game made by me. I tried to do it in as basic as possible. If you don't familiar with the game or have forgotten then surely google it. In this game, you are going to play with computer itself. Only dictionary data structure is used in this.
