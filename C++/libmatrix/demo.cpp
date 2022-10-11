@@ -16,21 +16,21 @@ int main()
         { 4, 3, 2, 3 }
     };
 
-    std::cout << "\n>> my matrix:\n";
+    cout << "\n>> my matrix:\n";
     for (int i = 0; i < m2.rows(); i++) {
         for (int j = 0; j < m2.cols(); j++)
-            std::cout << m2[i][j] << " ";
-        std::cout << "\n";
+            cout << m2[i][j] << " ";
+        cout << "\n";
     }
 
     // 4x4 unit matrix
     matrix<int> im = Matrix::I<int>(4);
 
-    std::cout << "\n>> my unit matrix:\n";
+    cout << "\n>> my unit matrix:\n";
     for (int i = 0; i < im.rows(); i++) {
         for (int j = 0; j < im.cols(); j++)
-            std::cout << im[i][j] << " ";
-        std::cout << "\n";
+            cout << im[i][j] << " ";
+        cout << "\n";
     }
 
     cout << "\nequality = ";
@@ -38,7 +38,7 @@ int main()
     else cout << "unequal\n";
 
     try {
-        std::cout << "\n>> sum:\n";
+        cout << "\n>> sum:\n";
         matrix<int> sum = m2 + im;
         sum.print();
     } catch (Matrix::Exception ex) {
@@ -47,7 +47,7 @@ int main()
     }
     try {
         matrix<int> diff = m2 - im;
-        std::cout << "\n>> difference:\n";
+        cout << "\n>> difference:\n";
         diff.print();
     } catch (Matrix::Exception ex) {
         if (ex == Matrix::EX_INCMP)
