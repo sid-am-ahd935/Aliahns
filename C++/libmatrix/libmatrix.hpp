@@ -23,7 +23,8 @@ namespace Matrix
     static const int EX_NULLPTR = 100;    // null pointer exception
 
     /**
-     * Throw an exception with value = Exception code.
+     * Throw an exception with value = exception code.
+     * @throws Matrix::Exception
      */
     void throwException(Exception ex, const std::string& msg)
     {
@@ -66,8 +67,8 @@ namespace Matrix
          * Create a new matrix object.
          * @param rows If DDA is unknown, pass no. of rows
          * @param cols If DDA is unknown, pass no. of cols
-         * @throws Matrix::Exception matrix can't have 0 rows - EX_0ROWS
-         * @throws Matrix::Exception matrix can't have 0 columns - EX_0COLS
+         * @throws Matrix::Exception Matrix can't have 0 rows - EX_0ROWS
+         * @throws Matrix::Exception Matrix can't have 0 columns - EX_0COLS
          */
         matrix(int rows, int cols)
         {
@@ -88,9 +89,9 @@ namespace Matrix
 
         /**
          * Create a new matrix object.
-         * @param initialiser list
-         * @throws Matrix::Exception matrix can't have 0 rows - EX_0ROWS
-         * @throws Matrix::Exception matrix can't have 0 columns - EX_0COLS
+         * @param lst 2D Initialiser list
+         * @throws Matrix::Exception Matrix can't have 0 rows - EX_0ROWS
+         * @throws Matrix::Exception Matrix can't have 0 columns - EX_0COLS
          */
         matrix(std::initializer_list<std::initializer_list<type>> lst)
         {
@@ -121,8 +122,8 @@ namespace Matrix
          * @param rows Row size of DDA
          * @param cols Column size of DDA
          * @param arr If DDA is known, pass &dda[0][0]
-         * @throws Matrix::Exception matrix can't have 0 rows - EX_0ROWS
-         * @throws Matrix::Exception matrix can't have 0 columns - EX_0COLS
+         * @throws Matrix::Exception Matrix can't have 0 rows - EX_0ROWS
+         * @throws Matrix::Exception Matrix can't have 0 columns - EX_0COLS
          */
         matrix(int rows, int cols, type *arr)
         {
@@ -219,11 +220,11 @@ namespace Matrix
 
         /**
          * Get an element of the matrix from an index.
-         * @param i row wise position of element
-         * @param j column wise position of element
+         * @param i Row wise position of element
+         * @param j Column wise position of element
          * @return <type> The value at index i, j
-         * @throws Matrix::Exception row index out of bounds - EX_ROUTB
-         * @throws Matrix::Exception column index out of bounds - EX_COUTB
+         * @throws Matrix::Exception Row index out of bounds - EX_ROUTB
+         * @throws Matrix::Exception Column index out of bounds - EX_COUTB
          */
         type get(int i, int j)
         {
@@ -236,11 +237,11 @@ namespace Matrix
 
         /**
          * Set an element of the matrix to an index.
-         * @param i row wise position of element
-         * @param j column wise position of element
-         * @param val value to be set
-         * @throws Matrix::Exception row index out of bounds - EX_ROUTB
-         * @throws Matrix::Exception column index out of bounds - EX_COUTB
+         * @param i Row wise position of element
+         * @param j Column wise position of element
+         * @param val Value to be set
+         * @throws Matrix::Exception Row index out of bounds - EX_ROUTB
+         * @throws Matrix::Exception Column index out of bounds - EX_COUTB
          */
         void set(int i, int j, type val)
         {
@@ -253,7 +254,7 @@ namespace Matrix
 
         /**
          * Access a posn of the matrix.
-         * @param int row
+         * @param i Row of matrix
          */
         type*& operator[](int i) const
         {
@@ -263,7 +264,7 @@ namespace Matrix
         /*
          * Compares two matrices for equality.
          * @param m2 The matrix to compare to
-         * @return boolean true if equal
+         * @return boolean True if equal
          */
         bool equals(const matrix<type>& m2)
         {
@@ -353,7 +354,7 @@ namespace Matrix
          * Calculate matrix to the power of +ve integer.
          * @param index Power of matrix
          * @return matrix<type> The resulting matrix
-         * @throws Matrix::Exception same as Exceptions of matrix::multiply method
+         * @throws Matrix::Exception Same as Exceptions of matrix::multiply method
          */
         matrix<type> power(int index)
         {
@@ -368,7 +369,7 @@ namespace Matrix
         /*
          * Compares two matrices for equality.
          * @param m2 The matrix to compare to
-         * @return boolean true if equal
+         * @return boolean True if equal
          */
         bool operator==(const matrix<type>& m2)
         {
@@ -422,7 +423,7 @@ namespace Matrix
          * Calculate matrix to the power of +ve integer
          * @param index Power of matrix
          * @return matrix<type> The resulting matrix
-         * @throws Matrix::Exception same as Exceptions of matrix::multiply method
+         * @throws Matrix::Exception Same as Exceptions of matrix::multiply method
          */
         matrix<type> operator^(int index)
         {
@@ -435,8 +436,8 @@ namespace Matrix
          * @param row The row to exclude
          * @param col The column to exclude
          * @return matrix<type> The sub matrix
-         * @throws Matrix::Exception row index out of bounds - EX_ROUTB
-         * @throws Matrix::Exception column index out of bounds - EX_COUTB
+         * @throws Matrix::Exception Row index out of bounds - EX_ROUTB
+         * @throws Matrix::Exception Column index out of bounds - EX_COUTB
          */
         matrix<type> excludeRowCol(int row, int col)
         {
@@ -597,11 +598,11 @@ namespace Matrix
 
     /**
      * Create a null matrix of given size.
-     * @param n rows of matrix
-     * @param cols? cols of matrix
-     * @return matrix<type> a null matrix
-     * @throws Matrix::Exception row index out of bounds - EX_ROUTB
-     * @throws Matrix::Exception column index out of bounds - EX_COUTB
+     * @param n Rows of matrix
+     * @param cols? Cols of matrix
+     * @return matrix<type> A null matrix
+     * @throws Matrix::Exception Row index out of bounds - EX_ROUTB
+     * @throws Matrix::Exception Column index out of bounds - EX_COUTB
      */
     template <typename type>
     matrix<type> O(int n, int cols = 0)
@@ -613,10 +614,10 @@ namespace Matrix
 
     /**
      * Create a unit matrix of given size.
-     * @param n size of matrix
-     * @return matrix<type> a unit matrix
-     * @throws Matrix::Exception row index out of bounds - EX_ROUTB
-     * @throws Matrix::Exception column index out of bounds - EX_COUTB
+     * @param n Size of matrix
+     * @return matrix<type> A unit matrix
+     * @throws Matrix::Exception Row index out of bounds - EX_ROUTB
+     * @throws Matrix::Exception Column index out of bounds - EX_COUTB
      */
     template <typename type>
     matrix<type> I(int n)

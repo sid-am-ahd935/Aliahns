@@ -27,20 +27,20 @@ int cols()
 ## Member functions
 
 #### Create a null matrix of given size
- - `param` n rows of matrix
- - `param` cols? cols of matrix
- - `return` matrix<type> a null matrix
- - `throws` Matrix::Exception row index out of bounds - `EX_ROUTB`
- - `throws` Matrix::Exception column index out of bounds - `EX_COUTB`
+ - `param` n Rows of matrix
+ - `param` cols? Cols of matrix
+ - `return` matrix<type> A null matrix
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
 matrix<type> Matrix::O<type>(int n, int cols = 0)
 ```
 
 #### Create a unit matrix of given size
- - `param` n size of matrix
- - `return` matrix<type> a unit matrix
- - `throws` Matrix::Exception row index out of bounds - `EX_ROUTB`
- - `throws` Matrix::Exception column index out of bounds - `EX_COUTB`
+ - `param` n Size of matrix
+ - `return` matrix<type> A unit matrix
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
 matrix<type> Matrix::I<type>(int n)
 ```
@@ -48,16 +48,16 @@ matrix<type> Matrix::I<type>(int n)
 #### Create null Matrix object
  - `param` rows If DDA is unknown, pass no. of rows
  - `param` cols If DDA is unknown, pass no. of cols
- - `throws` Matrix::Exception matrix can't have 0 rows - `EX_0ROWS`
- - `throws` Matrix::Exception matrix can't have 0 columns - `EX_0COLS`
+ - `throws` Matrix::Exception Matrix can't have 0 rows - `EX_0ROWS`
+ - `throws` Matrix::Exception Matrix can't have 0 columns - `EX_0COLS`
 ```c++
 matrix(int rows, int cols)
 ```
 
 #### Create a new matrix object
- - `param` 2D initializer list. See [demo.cpp](demo.cpp)
- - `throws` Matrix::Exception matrix can't have 0 rows - EX_0ROWS
- - `throws` Matrix::Exception matrix can't have 0 columns - EX_0COLS
+ - `param` lst 2D initializer list. See [demo.cpp](demo.cpp)
+ - `throws` Matrix::Exception Matrix can't have 0 rows - EX_0ROWS
+ - `throws` Matrix::Exception Matrix can't have 0 columns - EX_0COLS
 ```c++
 matrix(initializer_list<initializer_list<type>> lst)
 ```
@@ -67,8 +67,8 @@ The constructor accepts address to 1st element of the C++ DDA.
  - `param` rows Row size of DDA
  - `param` cols Column size of DDA
  - `param` arr If DDA is known, pass &dda[0][0]
- - `throws` Matrix::Exception matrix can't have 0 rows - `EX_0ROWS`
- - `throws` Matrix::Exception matrix can't have 0 columns - `EX_0COLS`
+ - `throws` Matrix::Exception Matrix can't have 0 rows - `EX_0ROWS`
+ - `throws` Matrix::Exception Matrix can't have 0 columns - `EX_0COLS`
 ```c++
 matrix(int rows, int cols, type *arr)
 ```
@@ -82,28 +82,28 @@ matrix(const matrix<type>& m2)
 ```
 
 #### Get an element of the matrix from an index
- - `param` i row wise position of element
- - `param` j column wise position of element
+ - `param` i Row wise position of element
+ - `param` j Column wise position of element
  - `return` type The value at index i, j
- - `throws` Matrix::Exception row index out of bounds - `EX_ROUTB`
- - `throws` Matrix::Exception column index out of bounds - `EX_COUTB`
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
 type get(int i, int j)
 ```
 
 #### Set an element of the matrix to an index
- - `param` i row wise position of element
- - `param` j column wise position of element
- - `param` val value to be set
- - `throws` Matrix::Exception row index out of bounds - `EX_ROUTB`
- - `throws` Matrix::Exception column index out of bounds - `EX_COUTB`
+ - `param` i Row wise position of element
+ - `param` j Column wise position of element
+ - `param` val Value to be set
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
 void set(int i, int j, type val)
 ```
 
 #### Compare two matrices for equality
  - `param` m2 The matrix to compare to
- - `return` boolean true if equal
+ - `return` boolean True if equal
 ```c++
 bool equals(const matrix<type>& m2)
 ```
@@ -142,7 +142,7 @@ matrix<type> multiply(const matrix<type>& m2)
 #### Calculate matrix to the power of +ve integer
  - `param` index Power of matrix
  - `return` matrix<type> The resulting matrix
- - `throws` Matrix::Exception same as errors of Matrix::multiply method
+ - `throws` Matrix::Exception Same as errors of Matrix::multiply method
 ```c++
 matrix<type> power(int index)
 ```
@@ -152,8 +152,8 @@ Useful for calculating determinants and cofactor matrices.
  - `param` row The row to exclude
  - `param` col The column to exclude
  - `return` matrix<type> The sub matrix
- - `throws` Matrix::Exception row index out of bounds - `EX_ROUTB`
- - `throws` Matrix::Exception column index out of bounds - `EX_COUTB`
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
 matrix<type> excludeRowCol(int row, int col)
 ```
@@ -201,10 +201,10 @@ void print(const std::string& msg = "")
 
 ## Details of possible exceptions
 Each exception has type of `Matrix::Exception` and may have a value equal to the following
- - `EX_0ROWS`  matrix can't have 0 rows
- - `EX_0COLS`  matrix can't have 0 columns
- - `EX_ROUTB`  row index out of bounds
- - `EX_COUTB`  column index out of bounds
- - `EX_INCMP`  incompatible matrices
- - `EX_NOSQR`  not a square matrix
- - `EX_DETR0`  during inversion, determinant is 0
+ - `EX_0ROWS`  Matrix can't have 0 rows
+ - `EX_0COLS`  Matrix can't have 0 columns
+ - `EX_ROUTB`  Row index out of bounds
+ - `EX_COUTB`  Column index out of bounds
+ - `EX_INCMP`  Incompatible matrices
+ - `EX_NOSQR`  Not a square matrix
+ - `EX_DETR0`  During inversion, determinant is 0
