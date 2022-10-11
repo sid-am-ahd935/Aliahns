@@ -1,179 +1,196 @@
 # Library Details
-Library namespace name: `mtx`
+Library namespace name: `Matrix`
 
-Library class name: `Matrix`
+Library class name: `matrix`
 
 ## Member variables
 
-#### Row size of matrix
+#### Row count of matrix
 ```c++
-int rows
+int rows()
 ```
 
-#### Column size of matrix
+#### Column count of matrix
 ```c++
-int cols
+int cols()
 ```
 
 ## Overloaded operators
- - `+` Adds 2 matrices
- - `-` Subtracts 2nd from 1st matrix
- - `*` Multiplies a matrix with a scalar or another matrix
- - `^` Calculates power (+ve integer) of a matrix
- - `==` Compares two matrices for equality
+ - `=` Copy matrix references
+ - `+` Add two matrices
+ - `-` Subtract 2nd from 1st matrix
+ - `*` Multiply a matrix with a scalar or another matrix
+ - `^` Calculate matrix to the power of +ve integer
+ - `==` Compare two matrices for equality
+ - `[][]` Access a posn of the matrix
 
 ## Member functions
 
 #### Create a null matrix of given size
- - `param` n rows of matrix
- - `param` cols? cols of matrix
- - `return` Matrix<type> a null matrix
- - `throws` mtx::Exception row index out of bounds - `E_ROUTB`
- - `throws` mtx::Exception column index out of bounds - `E_COUTB`
+ - `param` n Rows of matrix
+ - `param` cols? Cols of matrix
+ - `return` matrix<type> A null matrix
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
-static Matrix<type> O(int n, int cols = 0)
+matrix<type> Matrix::O<type>(int n, int cols = 0)
 ```
 
 #### Create a unit matrix of given size
- - `param` n size of matrix
- - `return` Matrix<type> a unit matrix
- - `throws` mtx::Exception row index out of bounds - `E_ROUTB`
- - `throws` mtx::Exception column index out of bounds - `E_COUTB`
+ - `param` n Size of matrix
+ - `return` matrix<type> A unit matrix
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
-static Matrix<type> I(int n)
+matrix<type> Matrix::I<type>(int n)
 ```
 
-#### Create empty matrix object
+#### Create null Matrix object
  - `param` rows If DDA is unknown, pass no. of rows
  - `param` cols If DDA is unknown, pass no. of cols
- - `throws` mtx::Exception matrix can't have 0 rows - `E_0ROWS`
- - `throws` mtx::Exception matrix can't have 0 columns - `E_0COLS`
+ - `throws` Matrix::Exception Matrix can't have 0 rows - `EX_0ROWS`
+ - `throws` Matrix::Exception Matrix can't have 0 columns - `EX_0COLS`
 ```c++
-explicit Matrix(int rows, int cols)
+matrix(int rows, int cols)
 ```
 
-#### Create matrix object from DDA
+#### Create a new matrix object
+ - `param` lst 2D initializer list. See [demo.cpp](demo.cpp)
+ - `throws` Matrix::Exception Matrix can't have 0 rows - EX_0ROWS
+ - `throws` Matrix::Exception Matrix can't have 0 columns - EX_0COLS
+```c++
+matrix(initializer_list<initializer_list<type>> lst)
+```
+
+#### Create Matrix object from DDA
 The constructor accepts address to 1st element of the C++ DDA.
-See [demo.cpp](demo.cpp).
  - `param` rows Row size of DDA
  - `param` cols Column size of DDA
  - `param` arr If DDA is known, pass &dda[0][0]
- - `throws` mtx::Exception matrix can't have 0 rows - `E_0ROWS`
- - `throws` mtx::Exception matrix can't have 0 columns - `E_0COLS`
+ - `throws` Matrix::Exception Matrix can't have 0 rows - `EX_0ROWS`
+ - `throws` Matrix::Exception Matrix can't have 0 columns - `EX_0COLS`
 ```c++
-explicit Matrix(int rows, int cols, type *arr)
+matrix(int rows, int cols, type *arr)
+```
+
+#### Copy a Matrix object via constructor
+Matrix uses smart reference counting approach.
+When all references are cleared, the memory is auto deleted on scope close.
+ - `param` m2 The source matrix
+```c++
+matrix(const matrix<type>& m2)
 ```
 
 #### Get an element of the matrix from an index
- - `param` i row wise position of element
- - `param` j column wise position of element
+ - `param` i Row wise position of element
+ - `param` j Column wise position of element
  - `return` type The value at index i, j
- - `throws` mtx::Exception row index out of bounds - `E_ROUTB`
- - `throws` mtx::Exception column index out of bounds - `E_COUTB`
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
 type get(int i, int j)
 ```
 
 #### Set an element of the matrix to an index
- - `param` i row wise position of element
- - `param` j column wise position of element
- - `param` val value to be set
- - `throws` mtx::Exception row index out of bounds - `E_ROUTB`
- - `throws` mtx::Exception column index out of bounds - `E_COUTB`
+ - `param` i Row wise position of element
+ - `param` j Column wise position of element
+ - `param` val Value to be set
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
 void set(int i, int j, type val)
 ```
 
 #### Compare two matrices for equality
  - `param` m2 The matrix to compare to
- - `return` boolean true if equal
+ - `return` boolean True if equal
 ```c++
-bool equals(Matrix<type>& m2)
+bool equals(const matrix<type>& m2)
 ```
 
 #### Add two compatible matrices
  - `param` m2 The matrix to add
- - `return` Matrix<type> The matrix of sums
- - `throws` mtx::Exception If matrices aren't compatible - `E_INCMP`
+ - `return` matrix<type> The matrix of sums
+ - `throws` Matrix::Exception If matrices aren't compatible - `EX_INCMP`
 ```c++
-Matrix<type> add(Matrix<type>& m2)
+matrix<type> add(const matrix<type>& m2)
 ```
 
-#### Subtract two compatible matrices
+#### Subtract 2nd from 1st matrix
  - `param` m2 The matrix to subtract
- - `return` Matrix<type> The matrix of differences
- - `throws` mtx::Exception If matrices aren't compatible - `E_INCMP`
+ - `return` matrix<type> The matrix of differences
+ - `throws` Matrix::Exception If matrices aren't compatible - `EX_INCMP`
 ```c++
-Matrix<type> subtract(Matrix<type>& m2)
+matrix<type> subtract(const matrix<type>& m2)
 ```
 
 #### Multiply a matrix by a scalar
  - `param` scalar Scalar to multiply by
  - `return` matrix The matrix of products
 ```c++
-Matrix<type> scale(type scalar)
+matrix<type> scale(type scalar)
 ```
 
 #### Multiply two compatible matrices
  - `param` m2 The matrix to multiply by
- - `return` Matrix<type> The matrix after multiplication
- - `throws` mtx::Exception If matrices aren't compatible - `E_INCMP`
+ - `return` matrix<type> The matrix after multiplication
+ - `throws` Matrix::Exception If matrices aren't compatible - `EX_INCMP`
 ```c++
-Matrix<type> multiply(Matrix<type>& m2)
+matrix<type> multiply(const matrix<type>& m2)
 ```
 
-#### Calculate matrix to the power of index
+#### Calculate matrix to the power of +ve integer
  - `param` index Power of matrix
- - `return` Matrix<type> The resulting matrix
- - `throws` mtx::Exception same as errors of Matrix::multiply method
+ - `return` matrix<type> The resulting matrix
+ - `throws` Matrix::Exception Same as errors of Matrix::multiply method
 ```c++
-Matrix<type> power(int index)
+matrix<type> power(int index)
 ```
 
 #### Exclude a row and a column
 Useful for calculating determinants and cofactor matrices.
  - `param` row The row to exclude
  - `param` col The column to exclude
- - `return` Matrix<type> The sub matrix
- - `throws` mtx::Exception row index out of bounds - `E_ROUTB`
- - `throws` mtx::Exception column index out of bounds - `E_COUTB`
+ - `return` matrix<type> The sub matrix
+ - `throws` Matrix::Exception Row index out of bounds - `EX_ROUTB`
+ - `throws` Matrix::Exception Column index out of bounds - `EX_COUTB`
 ```c++
-Matrix<type> excludeRowCol(int row, int col)
+matrix<type> excludeRowCol(int row, int col)
 ```
 
-#### Calculate determinant of matrix
+#### Calculate determinant of this matrix
  - `return` double The determinant
- - `throw` mtx::Exception If matrix isn't a square matrix - `E_NOSQR`
+ - `throw` Matrix::Exception If matrix isn't a square matrix - `EX_NOSQR`
 ```c++
 double determinant()
 ```
 
 #### Calculate the transpose of this matrix
- - `return` Matrix<type> The transpose
+ - `return` matrix<type> The transpose
 ```c++
-Matrix<type> transpose()
+matrix<type> transpose()
 ```
 
 #### Calculate the cofactor matrix of this matrix
- - `return` Matrix<type> The cofactor matrix
- - `throws` mtx::Exception If matrix isn't a square matrix - `E_NOSQR`
+ - `return` matrix<type> The cofactor matrix
+ - `throws` Matrix::Exception If matrix isn't a square matrix - `EX_NOSQR`
 ```c++
-Matrix<type> cofactor()
+matrix<type> cofactor()
 ```
 
 #### Calculate the adjoint of this matrix
- - `return` Matrix<type> The adjoint
- - `throws` mtx::Exception If matrix isn't a square matrix - `E_NOSQR`
+ - `return` matrix<type> The adjoint
+ - `throws` Matrix::Exception If matrix isn't a square matrix - `EX_NOSQR`
 ```c++
-Matrix<type> adjoint()
+matrix<type> adjoint()
 ```
 
 #### Calculate the inverse of this matrix
- - `return` Matrix<double> The inverse
- - `throws` mtx::Exception If matrix isn't a square matrix - `E_NOSQR`
- - `throws` mtx::Exception If determinant is 0 - `E_DETR0`
+ - `return` matrix<double> The inverse
+ - `throws` Matrix::Exception If matrix isn't a square matrix - `EX_NOSQR`
+ - `throws` Matrix::Exception If determinant is 0 - `EX_DETR0`
 ```c++
-Matrix<double> inverse()
+matrix<double> inverse()
 ```
 
 #### Display the matrix
@@ -183,11 +200,16 @@ void print(const std::string& msg = "")
 ```
 
 ## Details of possible exceptions
-Each exception has type of `mtx::Exception` and may have a value equal to the following
- - `E_0ROWS`  matrix can't have 0 rows
- - `E_0COLS`  matrix can't have 0 columns
- - `E_ROUTB`  row index out of bounds
- - `E_COUTB`  column index out of bounds
- - `E_INCMP`  incompatible matrices
- - `E_NOSQR`  not a square matrix
- - `E_DETR0`  during inversion, determinant is 0
+Each exception has type of `Matrix::Exception` and may have a value equal to the following
+ - `EX_0ROWS`  Matrix can't have 0 rows
+ - `EX_0COLS`  Matrix can't have 0 columns
+ - `EX_ROUTB`  Row index out of bounds
+ - `EX_COUTB`  Column index out of bounds
+ - `EX_INCMP`  Incompatible matrices
+ - `EX_NOSQR`  Not a square matrix
+ - `EX_DETR0`  During inversion, determinant is 0
+
+## Compiler flags
+The following flags can be enabled by using `-D` option as a CLI argument to `g++` and `clang++`.
+ - `-D DEBUG` On `Matrix::Exception` prints the message.
+ - `-D ALLOW_PRIMITIVES_ONLY` Only allows matrix of primitive datatype.
