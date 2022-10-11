@@ -5,22 +5,22 @@
 
 namespace Matrix
 {
-    // type error
-    typedef const std::string& Exception;
+    template <typename type> class matrix;
+
+    // type Exception
+    typedef const int Exception;
 
     // possible exceptions
-    const char *E_0ROWS = "E_0ROWS";
-    const char *E_0COLS = "E_0COLS";
-    const char *E_ROUTB = "E_ROUTB";
-    const char *E_COUTB = "E_COUTB";
-    const char *E_INCMP = "E_INCMP";
-    const char *E_NOSQR = "E_NOSQR";
-    const char *E_DETR0 = "E_DETR0";
+    static const int EX_0ROWS = 10;       // matrix can't have 0 rows
+    static const int EX_0COLS = 20;       // matrix can't have 0 columns
+    static const int EX_ROUTB = 30;       // row index out of bounds
+    static const int EX_COUTB = 40;       // column index out of bounds
+    static const int EX_INCMP = 50;       // incompatible matrices
+    static const int EX_NOSQR = 60;       // not a square matrix
+    static const int EX_DETR0 = 70;       // during inversion, determinant is 0
 
-    template <typename type>
-    class Matrix
-    {
-    public:
+    // more general exceptions
+    static const int EX_NULLPTR = 100;    // null pointer exception
 
     /**
      * Throw an exception with value = Exception code.
