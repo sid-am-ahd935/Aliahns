@@ -1,5 +1,6 @@
 # Matrix Library
 A template library for matrix operations.
+Visit [changelog](CHANGELOG.md).
 
 ### Usage
 View [library.md](library.md) for a list of all the member variables and functions available.
