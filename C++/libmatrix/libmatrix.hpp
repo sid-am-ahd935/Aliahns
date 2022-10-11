@@ -500,5 +500,65 @@ namespace mtx
                 std::cout << "\n";
             }
         }
+
+    private:
+        /**
+         * Row number of this matrix.
+         */
+        int *rows_ptr;
+
+        /**
+         * Column number of this matrix.
+         */
+        int *cols_ptr;
+
+        /**
+         * Double pointer to matrix data location.
+         */
+        type **mtx_ptr;
+
+        /**
+         * Stores a count of references.
+         */
+        int *refcnt_ptr;
+
+        /**
+         * Default constructor.
+         */
+        matrix()
+            : rows_ptr(nullptr), cols_ptr(nullptr), mtx_ptr(nullptr), refcnt_ptr(nullptr)
+        {}
     };
+
+    /**
+     * Create a null matrix of given size.
+     * @param n rows of matrix
+     * @param cols? cols of matrix
+     * @return matrix<type> a null matrix
+     * @throws Matrix::Exception row index out of bounds - EX_ROUTB
+     * @throws Matrix::Exception column index out of bounds - EX_COUTB
+     */
+    template <typename type>
+    matrix<type> O(int n, int cols = 0)
+    {
+        if (cols == 0)
+            cols = n;
+        return matrix<type>(n, cols);
+    }
+
+    /**
+     * Create a unit matrix of given size.
+     * @param n size of matrix
+     * @return matrix<type> a unit matrix
+     * @throws Matrix::Exception row index out of bounds - EX_ROUTB
+     * @throws Matrix::Exception column index out of bounds - EX_COUTB
+     */
+    template <typename type>
+    matrix<type> I(int n)
+    {
+        matrix<type> im = matrix<type>(n, n);
+        for (int i = 0; i < n; i++)
+            im[i][i] = 1;
+        return im;
+    }
 }
