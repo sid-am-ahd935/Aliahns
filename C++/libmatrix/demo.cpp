@@ -8,7 +8,7 @@ int main()
     using namespace std;        // standard namespace
     using namespace Matrix;     // namespace for this library
 
-    // the constructor accepts address to 1st element of the C++ DDA
+    // matrix accepts std::initializer_list
     matrix<int> m2 = {
         { 0, 2, 3, 4 },
         { 7, 1, 5, 6 },

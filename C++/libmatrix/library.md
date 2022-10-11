@@ -55,7 +55,7 @@ matrix(int rows, int cols)
 ```
 
 #### Create a new matrix object
- - `param` 2D initialiser list
+ - `param` 2D initializer list. See [demo.cpp](demo.cpp)
  - `throws` Matrix::Exception matrix can't have 0 rows - EX_0ROWS
  - `throws` Matrix::Exception matrix can't have 0 columns - EX_0COLS
 ```c++
@@ -64,7 +64,6 @@ matrix(initializer_list<initializer_list<type>> lst)
 
 #### Create Matrix object from DDA
 The constructor accepts address to 1st element of the C++ DDA.
-See [demo.cpp](demo.cpp).
  - `param` rows Row size of DDA
  - `param` cols Column size of DDA
  - `param` arr If DDA is known, pass &dda[0][0]
