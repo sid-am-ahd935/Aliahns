@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-namespace mtx
+namespace Matrix
 {
     // type error
     typedef const std::string& Exception;
@@ -22,10 +22,16 @@ namespace mtx
     {
     public:
 
-        /**
-         * Row number of this matrix
-         */
-        int rows;
+    /**
+     * Throw an exception with value = Exception code.
+     */
+    void throwException(Exception ex, const std::string& msg)
+    {
+    #ifdef DEBUG
+        std::cout << "Matrix::Exception::" << ex << ": " << msg << "\n";
+    #endif
+        throw ex;
+    }
 
         /**
          * Column number of this matrix
