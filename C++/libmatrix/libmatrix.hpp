@@ -492,76 +492,76 @@ namespace Matrix
         }
 
         /**
-         * Calculate the transpose of this matrix
-         * @return Matrix<type> The transpose
+         * Calculate the transpose of this matrix.
+         * @return matrix<type> The transpose
          */
-        Matrix<type> transpose()
+        matrix<type> transpose()
         {
-            Matrix<type> nm = Matrix<type>(this->cols, this->rows);
-            for (int i = 0; i < this->rows; i++)
-                for (int j = 0; j < this->cols; j++)
-                    nm.set(j, i, this->get(i, j));
+            matrix<type> nm = matrix<type>(this->cols(), this->rows());
+            for (int i = 0; i < this->rows(); i++)
+                for (int j = 0; j < this->cols(); j++)
+                    nm[j][i] = this->mtx_ptr[i][j];
             return nm;
         }
 
         /**
-         * Calculate the cofactor matrix of this matrix
-         * @return Matrix<type> The cofactor matrix
-         * @throws Exception If matrix isn't a square matrix - E_NOSQR
+         * Calculate the cofactor matrix of this matrix.
+         * @return matrix<type> The cofactor matrix
+         * @throws Matrix::Exception If matrix isn't a square matrix - EX_NOSQR
          */
-        Matrix<type> cofactor()
+        matrix<type> cofactor()
         {
-            if (this->rows != this->cols)
-                this->throwException(E_NOSQR, "not a square matrix");
-            Matrix<type> nm = Matrix<type>(this->rows, this->cols);
-            for (int i = 0; i < this->rows; i++)
-                for (int j = 0; j < this->cols; j++) {
+            if (this->rows() != this->cols())
+                Matrix::throwException(EX_NOSQR, "not a square matrix");
+            matrix<type> nm = matrix<type>(this->rows(), this->cols());
+            for (int i = 0; i < this->rows(); i++)
+                for (int j = 0; j < this->cols(); j++) {
                     double coeff = pow(-1, i + 1 + j + 1);
-                    Matrix<type> subm = this->excludeRowCol(i, j);
-                    nm.set(i, j, coeff * subm.determinant());
+                    matrix<type> subm = this->excludeRowCol(i, j);
+                    nm[i][j] = coeff * subm.determinant();
                 }
             return nm;
         }
 
         /**
-         * Calculate the adjoint of this matrix
-         * @return Matrix<type> The adjoint
-         * @throws Exception If matrix isn't a square matrix - E_NOSQR
+         * Calculate the adjoint of this matrix.
+         * @return matrix<type> The adjoint
+         * @throws Matrix::Exception If matrix isn't a square matrix - EX_NOSQR
          */
-        Matrix<type> adjoint()
+        matrix<type> adjoint()
         {
-            if (this->rows != this->cols)
-                this->throwException(E_NOSQR, "not a square matrix");
+            if (this->rows() != this->cols())
+                Matrix::throwException(EX_NOSQR, "not a square matrix");
             return this->cofactor().transpose();
         }
 
         /**
-         * Calculate the inverse of this matrix
-         * @return Matrix<double> The inverse
-         * @throws Exception If matrix isn't a square matrix - E_NOSQR
-         * @throws Exception If determinant is 0 - E_DETR0
+         * Calculate the inverse of this matrix.
+         * @return matrix<double> The inverse
+         * @throws Matrix::Exception If matrix isn't a square matrix - EX_NOSQR
+         * @throws Matrix::Exception If determinant is 0 - EX_DETR0
          */
-        Matrix<double> inverse()
+        matrix<double> inverse()
         {
-            if (this->rows != this->cols)
-                this->throwException(E_NOSQR, "not a square matrix");
+            if (this->rows() != this->cols())
+                Matrix::throwException(EX_NOSQR, "not a square matrix");
             double determinant = this->determinant();
             if (determinant == 0)
-                this->throwException(E_DETR0, "determinant is 0");
-            return this->adjoint().scale(1/determinant).toDoubleMatrix();
+                Matrix::throwException(EX_DETR0, "determinant is 0");
+            return this->toDoubleMatrix().adjoint().scale(1/determinant);
         }
 
         /**
-         * Display the matrix
+         * Display the matrix.
          * @param msg? The message to print
          */
         void print(const std::string& msg = "")
         {
             if (msg != "")
                 std::cout << msg << "\n";
-            for (int i = 0; i < this->rows; i++) {
-                for (int j = 0; j < this->cols; j++)
-                    std::cout << this->get(i, j) << ((j < this->cols -1)? ", " : "");
+            for (int i = 0; i < this->rows(); i++) {
+                for (int j = 0; j < this->cols(); j++)
+                    std::cout << this->mtx_ptr[i][j] << ((j < this->cols() -1)? ", " : "");
                 std::cout << "\n";
             }
         }
