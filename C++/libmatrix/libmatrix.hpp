@@ -33,398 +33,457 @@ namespace Matrix
         throw ex;
     }
 
+    template <typename type>
+    class matrix
+    {
+        static_assert(std::is_fundamental<type>::value, "Matrix::matrix: template argument should be a primitive type");
+
+    public:
         /**
-         * Column number of this matrix
+         * Only another matrix can access properties of a matrix directly
          */
-        int cols;
+        template <typename T> friend class matrix;
 
         /**
-         * Double pointer to matrix data location
+         * Get row count of matrix.
+         * @return int
          */
-        type **matrix;
-
-        /**
-         * Create a null matrix of given size
-         * @param n rows of matrix
-         * @param cols? cols of matrix
-         * @return Matrix<type> a null matrix
-         * @throws Exception row index out of bounds - E_ROUTB
-         * @throws Exception column index out of bounds - E_COUTB
-         */
-        static Matrix<type> O(int n, int cols = 0)
+        int rows() const
         {
-            if (cols == 0)
-                cols = n;
-            return Matrix<type>(n, cols, true);
+            return (int) *this->rows_ptr;
         }
 
         /**
-         * Create a unit matrix of given size
-         * @param n size of matrix
-         * @return Matrix<type> a unit matrix
-         * @throws Exception row index out of bounds - E_ROUTB
-         * @throws Exception column index out of bounds - E_COUTB
+         * Get column count of matrix.
+         * @return int
          */
-        static Matrix<type> I(int n)
+        int cols() const
         {
-            Matrix<type> im = Matrix<type>(n, n);
-            for (int i = 0; i < n; i++)
-                im.set(i, i, 1);
-            return im;
+            return (int) *this->cols_ptr;
         }
 
         /**
-         * Default constructor
-         */
-        explicit Matrix()
-        {
-            this->rows = 0;
-            this->cols = 0;
-            this->matrix = nullptr;
-        }
-
-        /**
-         * Create a new Matrix object
+         * Create a new matrix object.
          * @param rows If DDA is unknown, pass no. of rows
          * @param cols If DDA is unknown, pass no. of cols
-         * @throws Exception matrix can't have 0 rows - E_0ROWS
-         * @throws Exception matrix can't have 0 columns - E_0COLS
+         * @throws Matrix::Exception matrix can't have 0 rows - EX_0ROWS
+         * @throws Matrix::Exception matrix can't have 0 columns - EX_0COLS
          */
-        explicit Matrix(int rows, int cols)
+        matrix(int rows, int cols)
         {
             if (rows < 1)
-                this->throwException(E_0ROWS, "matrix can't have 0 rows");
+                Matrix::throwException(EX_0ROWS, "matrix can't have 0 rows");
             if (cols < 1)
-                this->throwException(E_0COLS, "matrix can't have 0 columns");
-            this->rows = rows;
-            this->cols = cols;
-            this->matrix = new type*[rows];
-            for (int i = 0; i < this->rows; i++) {
-                this->matrix[i] = new type[cols];
-                for (int j = 0; j < this->cols; j++)
-                    this->set(i, j, 0);
+                Matrix::throwException(EX_0COLS, "matrix can't have 0 columns");
+            this->rows_ptr = new int(rows);
+            this->cols_ptr = new int(cols);
+            this->mtx_ptr = new type*[rows];
+            for (int i = 0; i < this->rows(); i++) {
+                this->mtx_ptr[i] = new type[cols];
+                for (int j = 0; j < this->cols(); j++)
+                    this->mtx_ptr[i][j] = 0;
             }
+            this->refcnt_ptr = new int(1);
         }
 
         /**
-         * Create a new Matrix object
+         * Create a new matrix object.
+         * @param initialiser list
+         * @throws Matrix::Exception matrix can't have 0 rows - EX_0ROWS
+         * @throws Matrix::Exception matrix can't have 0 columns - EX_0COLS
+         */
+        matrix(std::initializer_list<std::initializer_list<type>> lst)
+        {
+            int rows = lst.size();
+            int cols = lst.begin()->size();
+            if (rows < 1)
+                Matrix::throwException(EX_0ROWS, "matrix can't have 0 rows");
+            if (cols < 1)
+                Matrix::throwException(EX_0COLS, "matrix can't have 0 columns");
+            this->rows_ptr = new int(rows);
+            this->cols_ptr = new int(cols);
+            this->mtx_ptr = new type*[rows];
+            int i = 0;
+            for (const auto& lrow : lst) {
+                this->mtx_ptr[i] = new type[cols];
+                int j = 0;
+                for (const auto& el : lrow) {
+                    this->mtx_ptr[i][j] = el;
+                    j++;
+                }
+                i++;
+            }
+            this->refcnt_ptr = new int(1);
+        }
+
+        /**
+         * Create a new matrix object.
          * @param rows Row size of DDA
          * @param cols Column size of DDA
          * @param arr If DDA is known, pass &dda[0][0]
-         * @throws Exception matrix can't have 0 rows - E_0ROWS
-         * @throws Exception matrix can't have 0 columns - E_0COLS
+         * @throws Matrix::Exception matrix can't have 0 rows - EX_0ROWS
+         * @throws Matrix::Exception matrix can't have 0 columns - EX_0COLS
          */
-        explicit Matrix(int rows, int cols, type *arr)
+        matrix(int rows, int cols, type *arr)
         {
             if (rows < 1)
-                this->throwException(E_0ROWS, "matrix can't have 0 rows");
+                Matrix::throwException(EX_0ROWS, "matrix can't have 0 rows");
             if (cols < 1)
-                this->throwException(E_0COLS, "matrix can't have 0 columns");
-            this->rows = rows;
-            this->cols = cols;
-            this->matrix = new type*[rows];
-            for (int i = 0; i < this->rows; i++) {
-                this->matrix[i] = new type[cols];
-                for (int j = 0; j < this->cols; j++)
-                    this->set(i, j, arr[i*cols +j]);
+                Matrix::throwException(EX_0COLS, "matrix can't have 0 columns");
+            this->rows_ptr = new int(rows);
+            this->cols_ptr = new int(cols);
+            this->mtx_ptr = new type*[rows];
+            for (int i = 0; i < this->rows(); i++) {
+                this->mtx_ptr[i] = new type[cols];
+                for (int j = 0; j < this->cols(); j++)
+                    this->mtx_ptr[i][j] = arr[i*cols +j];
             }
+            this->refcnt_ptr = new int(1);
         }
 
         /**
-         * Constructs a Matrix<double> from a Matrix<type>
+         * Copy a matrix object via constructor.
+         * matrix uses smart reference counting approach. When all references are cleared, the memory is auto deleted.
+         * @param m2 The source matrix
          */
-        Matrix<double> toDoubleMatrix()
+        matrix(const matrix<type>& m2)
         {
-            Matrix<double> dm;
-            dm.rows = this->rows;
-            dm.cols = this->cols;
-            dm.matrix = new double*[rows];
-            for (int i = 0; i < dm.rows; i++) {
-                dm.matrix[i] = new double[cols];
-                for (int j = 0; j < dm.cols; j++)
-                    dm.set(i, j, (double) this->get(i, j));
+            if (!m2.refcnt_ptr) Matrix::throwException(EX_NULLPTR, "null pointer exception");
+            this->mtx_ptr = m2.mtx_ptr;
+            this->rows_ptr = m2.rows_ptr;
+            this->cols_ptr = m2.cols_ptr;
+            this->refcnt_ptr = m2.refcnt_ptr;
+            (*this->refcnt_ptr)++;
+        }
+
+        /**
+         * Copy a matrix object through assignment.
+         * matrix uses smart reference counting approach. When all references are cleared, the memory is auto deleted.
+         * @param m2 The source matrix
+         */
+        matrix<type> operator=(const matrix<type>& m2)
+        {
+            if (!m2.refcnt_ptr) Matrix::throwException(EX_NULLPTR, "null pointer exception");
+            // release old matrix data
+            (*this->refcnt_ptr)--;
+            if ((*this->refcnt_ptr) == 0) {
+                for (int i = 0; i < this->rows(); i++)
+                    delete[] this->mtx_ptr[i];
+                delete[] this->mtx_ptr;
+                delete this->rows_ptr;
+                delete this->cols_ptr;
+                delete this->refcnt_ptr;
+            }
+            // catch new matrix data
+            this->mtx_ptr = m2.mtx_ptr;
+            this->rows_ptr = m2.rows_ptr;
+            this->cols_ptr = m2.cols_ptr;
+            this->refcnt_ptr = m2.refcnt_ptr;
+            (*this->refcnt_ptr)++;
+            return *this;
+        }
+
+        /**
+         * Construct a matrix<double> from a matrix<type>.
+         */
+        matrix<double> toDoubleMatrix()
+        {
+            matrix<double> dm;
+            dm.rows_ptr = new int(this->rows());
+            dm.cols_ptr = new int(this->cols());
+            dm.refcnt_ptr = new int(1);
+            dm.mtx_ptr = new double*[this->rows()];
+            for (int i = 0; i < dm.rows(); i++) {
+                dm.mtx_ptr[i] = new double[this->cols()];
+                for (int j = 0; j < dm.cols(); j++)
+                    dm[i][j] = (double) this->mtx_ptr[i][j];
             }
             return dm;
         }
 
         /**
-         * Clears the array of the matrix instance on scope exit
+         * Clears the array of the matrix instance on scope exit.
          */
-        ~Matrix()
+        ~matrix()
         {
-            for (int i = 0; i < this->rows; i++)
-                delete[] this->matrix[i];
-            delete[] this->matrix;
+            (*this->refcnt_ptr)--;
+            if ((*this->refcnt_ptr) == 0) {
+                for (int i = 0; i < this->rows(); i++)
+                    delete[] this->mtx_ptr[i];
+                delete[] this->mtx_ptr;
+                delete this->rows_ptr;
+                delete this->cols_ptr;
+                delete this->refcnt_ptr;
+            }
         }
 
         /**
-         * Throw an exception with value = error code
-         */
-        void throwException(const std::string& errcode, const std::string& msg)
-        {
-        #ifdef DEBUG
-            std::cout << "error: " << errcode << ": " << msg << "\n";
-        #endif
-            throw errcode;
-        }
-
-        /**
-         * Get an element of the matrix from an index
+         * Get an element of the matrix from an index.
          * @param i row wise position of element
          * @param j column wise position of element
          * @return <type> The value at index i, j
-         * @throws Exception row index out of bounds - E_ROUTB
-         * @throws Exception column index out of bounds - E_COUTB
+         * @throws Matrix::Exception row index out of bounds - EX_ROUTB
+         * @throws Matrix::Exception column index out of bounds - EX_COUTB
          */
         type get(int i, int j)
         {
-            if (i < 0 || i > this->rows)
-                this->throwException(E_ROUTB, "row index out of bounds");
-            if (j < 0 || j > this->rows)
-                this->throwException(E_COUTB, "column index out of bounds");
-            return this->matrix[i][j];
+            if (i < 0 || i > this->rows())
+                Matrix::throwException(EX_ROUTB, "row index out of bounds");
+            if (j < 0 || j > this->rows())
+                Matrix::throwException(EX_COUTB, "column index out of bounds");
+            return this->mtx_ptr[i][j];
         }
 
         /**
-         * Set an element of the matrix to an index
+         * Set an element of the matrix to an index.
          * @param i row wise position of element
          * @param j column wise position of element
          * @param val value to be set
-         * @throws Exception row index out of bounds - E_ROUTB
-         * @throws Exception column index out of bounds - E_COUTB
+         * @throws Matrix::Exception row index out of bounds - EX_ROUTB
+         * @throws Matrix::Exception column index out of bounds - EX_COUTB
          */
         void set(int i, int j, type val)
         {
-            if (i < 0 || i > this->rows)
-                this->throwException(E_ROUTB, "row index out of bounds");
-            if (j < 0 || j > this->cols)
-                this->throwException(E_COUTB, "column index out of bounds");
-            this->matrix[i][j] = val;
+            if (i < 0 || i > this->rows())
+                Matrix::throwException(EX_ROUTB, "row index out of bounds");
+            if (j < 0 || j > this->cols())
+                Matrix::throwException(EX_COUTB, "column index out of bounds");
+            this->mtx_ptr[i][j] = val;
+        }
+
+        /**
+         * Access a posn of the matrix.
+         * @param int row
+         */
+        type*& operator[](int i) const
+        {
+            return this->mtx_ptr[i];
         }
 
         /*
-         * Compares two matrices for equality
+         * Compares two matrices for equality.
          * @param m2 The matrix to compare to
          * @return boolean true if equal
          */
-        bool equals(Matrix<type>& m2)
+        bool equals(const matrix<type>& m2)
         {
-            if (this->rows != m2.rows || this->cols != m2.cols)
+            if (this->rows() != m2.rows() || this->cols() != m2.cols())
                 return false;
-            for (int i = 0; i < this->rows; i++)
-                for (int j = 0; j < this->cols; j++)
-                    if (this->get(i, j) != m2.get(i, j))
+            for (int i = 0; i < this->rows(); i++)
+                for (int j = 0; j < this->cols(); j++)
+                    if (this->mtx_ptr[i][j] != m2[i][j])
                         return false;
             return true;
         }
 
         /**
-         * Add two compatible matrices
+         * Add two compatible matrices.
          * @param m2 The matrix to add
-         * @return Matrix<type> The matrix of sums
-         * @throws Exception If matrices aren't compatible - E_INCMP
+         * @return matrix<type> The matrix of sums
+         * @throws Matrix::Exception If matrices aren't compatible - EX_INCMP
          */
-        Matrix<type> add(Matrix<type>& m2, bool sub = false)
+        matrix<type> add(const matrix<type>& m2, bool sub = false)
         {
-            if (m2.rows != this->rows || m2.cols != this->cols)
-                this->throwException(E_INCMP, "incompatible matrices for addition");
-            Matrix<type> nm = Matrix<type>(this->rows, this->cols);
-            for (int i = 0; i < this->rows; i++)
-                for (int j = 0; j < this->cols; j++) {
-                    type rslt = this->get(i, j) + (sub ? (-1) * m2.get(i, j) : m2.get(i, j));
-                    nm.set(i, j, rslt);
+            if (m2.rows() != this->rows() || m2.cols() != this->cols())
+                Matrix::throwException(EX_INCMP, "incompatible matrices for addition");
+            matrix<type> nm = matrix<type>(this->rows(), this->cols());
+            for (int i = 0; i < this->rows(); i++)
+                for (int j = 0; j < this->cols(); j++) {
+                    type rslt = this->mtx_ptr[i][j] + (sub ? (-1) * m2[i][j] : m2[i][j]);
+                    nm[i][j] = rslt;
                 }
             return nm;
         }
 
         /**
-         * Subtract two compatible matrices
+         * Subtract 2nd from 1st matrix.
          * @param m2 The matrix to subtract
-         * @return Matrix<type> The matrix of differences
-         * @throws Exception If matrices aren't compatible - E_INCMP
+         * @return matrix<type> The matrix of differences
+         * @throws Matrix::Exception If matrices aren't compatible - EX_INCMP
          */
-        Matrix<type> subtract(Matrix<type>& m2)
+        matrix<type> subtract(const matrix<type>& m2)
         {
-            if (m2.rows != this->rows || m2.cols != this->cols)
-                this->throwException(E_INCMP, "incompatible matrices for subtraction");
+            if (m2.rows() != this->rows() || m2.cols() != this->cols())
+                Matrix::throwException(EX_INCMP, "incompatible matrices for subtraction");
             return this->add(m2, true);
         }
 
         /**
-         * Multiplies a matrix by a scalar
+         * Multiply a matrix by a scalar.
          * @param scalar Scalar to multiply by
-         * @return Matrix The matrix of products
+         * @return matrix The matrix of products
          */
-        Matrix<type> scale(type scalar)
+        matrix<type> scale(type scalar)
         {
-            Matrix<type> nm = Matrix<type>(this->rows, this->cols);
-            for (int i = 0; i < this->rows; i++)
-                for (int j = 0; j < this->cols; j++) {
-                    type rslt = scalar * this->get(i, j);
-                    nm.set(i, j, rslt);
+            matrix<type> nm = matrix<type>(this->rows(), this->cols());
+            for (int i = 0; i < this->rows(); i++)
+                for (int j = 0; j < this->cols(); j++) {
+                    type rslt = scalar * this->mtx_ptr[i][j];
+                    nm[i][j] = rslt;
                 }
             return nm;
         }
 
         /**
-         * Multiplies two compatible matrices
+         * Multiply two compatible matrices.
          * @param m2 The matrix to multiply by
-         * @return Matrix<type> The matrix after multiplication
-         * @throws Exception If matrices aren't compatible - E_INCMP
+         * @return matrix<type> The matrix after multiplication
+         * @throws Matrix::Exception If matrices aren't compatible - EX_INCMP
          */
-        Matrix<type> multiply(Matrix<type>& m2)
+        matrix<type> multiply(const matrix<type>& m2)
         {
-            if (this->cols != m2.rows)
-                this->throwException(E_INCMP, "incompatible matrices for multiplication");
-            int m = this->rows;
-            int n = this->cols; // same
-            n = m2.rows;        // same
-            int o = m2.cols;
-            Matrix<type> nm = Matrix<type>(m, o);
+            if (this->cols() != m2.rows())
+                Matrix::throwException(EX_INCMP, "incompatible matrices for multiplication");
+            int m = this->rows();
+            int n = this->cols(); // same
+            n = m2.rows();           // same
+            int o = m2.cols();
+            matrix<type> nm = matrix<type>(m, o);
             for (int i = 0; i < m; i++)
                 for (int j = 0; j < o; j++) {
                     double sum = 0;
                     for (int k = 0; k < n; k++)
-                        sum += this->get(i, k) * m2.get(k, j);
-                    nm.set(i, j, sum);
+                        sum += this->mtx_ptr[i][k] * m2[k][j];
+                    nm[i][j] = sum;
                 }
             return nm;
         }
 
         /**
-         * Calculate matrix to the power of index
+         * Calculate matrix to the power of +ve integer.
          * @param index Power of matrix
-         * @return Matrix<type> The resulting matrix
-         * @throws Exception same as errors of Matrix::multiply method
+         * @return matrix<type> The resulting matrix
+         * @throws Matrix::Exception same as Exceptions of matrix::multiply method
          */
-        Matrix<type> power(int index)
+        matrix<type> power(int index)
         {
-            Matrix<type> nm = *this;
+            matrix<type> nm = *this;
             for (int i = 0; i < index - 1; i++) {
-                Matrix<type> tmp = nm.multiply(*this);
+                matrix<type> tmp = nm.multiply(*this);
                 nm = tmp;
             }
             return nm;
         }
 
         /*
-         * Compares two matrices for equality
+         * Compares two matrices for equality.
          * @param m2 The matrix to compare to
          * @return boolean true if equal
          */
-        bool operator==(Matrix<type>& m2)
+        bool operator==(const matrix<type>& m2)
         {
             return this->equals(m2);
         }
 
         /**
-         * Add two compatible matrices
+         * Add two compatible matrices.
          * @param m2 The matrix to add
-         * @return Matrix<type> The matrix of sums
-         * @throws Exception If matrices aren't compatible - E_INCMP
+         * @return matrix<type> The matrix of sums
+         * @throws Matrix::Exception If matrices aren't compatible - EX_INCMP
          */
-        Matrix<type> operator+(Matrix<type>& m2)
+        matrix<type> operator+(const matrix<type>& m2)
         {
             return this->add(m2);
         }
 
         /**
-         * Subtract two compatible matrices
+         * Subtract 2nd from 1st matrix.
          * @param m2 The matrix to subtract
-         * @return Matrix<type> The matrix of differences
-         * @throws Exception If matrices aren't compatible - E_INCMP
+         * @return matrix<type> The matrix of differences
+         * @throws Matrix::Exception If matrices aren't compatible - EX_INCMP
          */
-        Matrix<type> operator-(Matrix<type>& m2)
+        matrix<type> operator-(const matrix<type>& m2)
         {
             return this->subtract(m2);
         }
 
         /**
-         * Multiplies a matrix by a scalar
+         * Multiply a matrix by a scalar.
          * @param scalar Scalar to multiply by
-         * @return Matrix The matrix of products
+         * @return matrix The matrix of products
          */
-        Matrix<type> operator*(type scalar)
+        matrix<type> operator*(type scalar)
         {
             return this->scale(scalar);
         }
 
         /**
-         * Multiplies two compatible matrices
+         * Multiply two compatible matrices.
          * @param m2 The matrix to multiply by
-         * @return Matrix<type> The matrix after multiplication
-         * @throws Exception If matrices aren't compatible - E_INCMP
+         * @return matrix<type> The matrix after multiplication
+         * @throws Matrix::Exception If matrices aren't compatible - EX_INCMP
          */
-        Matrix<type> operator*(Matrix<type>& m2)
+        matrix<type> operator*(const matrix<type>& m2)
         {
             return this->multiply(m2);
         }
 
         /**
-         * Calculate matrix to the power of index
+         * Calculate matrix to the power of +ve integer
          * @param index Power of matrix
-         * @return Matrix<type> The resulting matrix
-         * @throws Exception same as errors of Matrix::multiply method
+         * @return matrix<type> The resulting matrix
+         * @throws Matrix::Exception same as Exceptions of matrix::multiply method
          */
-        Matrix<type> operator^(int index)
+        matrix<type> operator^(int index)
         {
             return this->power(index);
         }
 
         /**
-         * Excludes a row and a column and generates a sub matrix. Useful for calculating determinants and cofactor matrices.
+         * Excludes a row and a column and generates a sub matrix.
+         * Useful for calculating determinants and cofactor matrices.
          * @param row The row to exclude
          * @param col The column to exclude
-         * @return Matrix<type> The sub matrix
-         * @throws Exception row index out of bounds - E_ROUTB
-         * @throws Exception column index out of bounds - E_COUTB
+         * @return matrix<type> The sub matrix
+         * @throws Matrix::Exception row index out of bounds - EX_ROUTB
+         * @throws Matrix::Exception column index out of bounds - EX_COUTB
          */
-        Matrix<type> excludeRowCol(int row, int col)
+        matrix<type> excludeRowCol(int row, int col)
         {
-            if (row < 0 || row > this->rows)
-                this->throwException(E_ROUTB, "row index out of bounds");
-            if (col < 0 || col > this->rows)
-                this->throwException(E_COUTB, "column index out of bounds");
-            Matrix<type> subm = Matrix(this->rows - 1, this->cols - 1);
+            if (row < 0 || row > this->rows())
+                Matrix::throwException(EX_ROUTB, "row index out of bounds");
+            if (col < 0 || col > this->rows())
+                Matrix::throwException(EX_COUTB, "column index out of bounds");
+            matrix<type> subm = matrix<type>(this->rows() - 1, this->cols() - 1);
             bool skipRow = false;
-            for (int j = 0; j < this->rows - 1; j++) {
+            for (int j = 0; j < this->rows() - 1; j++) {
                 bool skipCol = false;
                 int jSelf = j;
                 if (j == row)
                     skipRow = true;
                 if (skipRow)
                     jSelf++;
-                for (int k = 0; k < this->cols - 1; k++) {
+                for (int k = 0; k < this->cols() - 1; k++) {
                     int kSelf = k;
                     if (k == col)
                         skipCol = true;
                     if (skipCol)
                         kSelf++;
-                    subm.set(j, k, this->get(jSelf, kSelf));
+                    subm[j][k] = this->mtx_ptr[jSelf][kSelf];
                 }
             }
             return subm;
         }
 
         /**
-         * Calculate determinant of matrix
+         * Calculate determinant of this matrix.
          * @return double The determinant
-         * @throw Exception If matrix isn't a square matrix - E_NOSQR
+         * @throw Exception If matrix isn't a square matrix - EX_NOSQR
          */
         double determinant()
         {
-            if (this->rows != this->cols)
-                this->throwException(E_NOSQR, "not a square matrix");
-            int n = this->rows;
+            if (this->rows() != this->cols())
+                Matrix::throwException(EX_NOSQR, "not a square matrix");
+            int n = this->rows();
             double det = 0;
             if (n == 1)
-                return this->get(0, 0);
+                return this->mtx_ptr[0][0];
             else if (n == 2)
-                return this->get(0, 0) * this->get(1, 1) - this->get(0, 1) * this->get(1, 0);
+                return this->mtx_ptr[0][0] * this->mtx_ptr[1][1] - this->mtx_ptr[0][1] * this->mtx_ptr[1][0];
             else
                 for (int i = 0; i < n; i++) {
-                    double coeff = pow(-1, i) * this->get(0, i);
-                    Matrix<type> subm = this->excludeRowCol(0, i);
+                    double coeff = pow(-1, i) * this->mtx_ptr[0][i];
+                    matrix<type> subm = this->excludeRowCol(0, i);
                     double subdet = subm.determinant();
                     double term = coeff * subdet;
                     det += term;
