@@ -37,8 +37,9 @@ namespace Matrix
     template <typename type>
     class matrix
     {
+    #ifdef ALLOW_PRIMITIVES_ONLY
         static_assert(std::is_fundamental<type>::value, "Matrix::matrix: template argument should be a primitive type");
-
+    #endif
     public:
         /**
          * Only another matrix can access properties of a matrix directly

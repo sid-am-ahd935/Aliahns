@@ -208,3 +208,8 @@ Each exception has type of `Matrix::Exception` and may have a value equal to the
  - `EX_INCMP`  Incompatible matrices
  - `EX_NOSQR`  Not a square matrix
  - `EX_DETR0`  During inversion, determinant is 0
+
+## Compiler flags
+The following flags can be enabled by using `-D` option as a CLI argument to `g++` and `clang++`.
+ - `-D DEBUG` On `Matrix::Exception` prints the message.
+ - `-D ALLOW_PRIMITIVES_ONLY` Only allows matrix primitive datatype.
