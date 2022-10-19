@@ -1,0 +1,1 @@
+This program prints Pyramid pattern either filled or hollow as per user's choice. Quite customized with option to choose what to display in pyramid pattern.
