@@ -1,0 +1,59 @@
+body{
+    background-image: url(/imgs//bg.jfif);
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+header{
+    color: black;
+    margin: 3vh 3vw;
+    font-size: 28px;
+    justify-content: space-between !important;
+}
+
+.container{
+    background-color: #f4b542;
+    width: 48%;
+    margin: 25vh 0 0 4vw;
+    padding: 2vw;
+    text-align: center;
+    border-radius: 10px;
+
+}
+
+.container h3{
+    font-size: 26px;
+    margin: 0rem;
+}
+
+.left-form, .right-form{
+    padding: 1.2rem;
+}
+
+input{
+    height: 26px;
+    border: 1px solid black;
+    border-radius: 7px;
+    color: #ff7f00;
+    padding: 4px 7px;
+    width: 63%;
+    font-size: 18px;
+    text-align: center;
+    font-family: inherit;
+}
+
+.mid h3, .left h3, .right h3{
+    margin: 1rem auto !important;
+}
