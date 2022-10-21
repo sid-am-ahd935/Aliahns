@@ -24,3 +24,9 @@ At GDSC Aliah, we will be introducing students to all the ins and outs of the IT
 <h3>Twitter: </h3> https://twitter.com/GDSCAliah
 <h3>LinkedIn: </h3> https://www.linkedin.com/company/gdsc-aliah/
 <h3>Instagram: </h3>https://www.instagram.com/gdscaliah/
+
+<h1 align="center">Contributors</h1>
+
+<a href="https://github.com/sid-am-ahd935/Aliahns/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sid-am-ahd935/Aliahns" />
+</a>
