@@ -1,0 +1,173 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+/* --------- Header Section  ---------- */
+header {
+    background-image: linear-gradient(transparent, #000000c4), url(img/header-bg-2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 6%;
+    height: 50vh;
+}
+
+.header-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* --------- nav button  ------- */
+
+.nav-bar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 3% 0;
+}
+
+.nav-bar button {
+    margin-left: 2%;
+}
+
+/* ------ header containt -------- */
+.logo {}
+
+.logo-span-upper-div {}
+
+#logo-span {
+    background-color: white;
+    font-size: 50px;
+    padding: 0 13px;
+    border-radius: 37px;
+    color: red;
+    font-weight: bold;
+}
+
+.main-header-content {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-header-content h1 {
+    color: white;
+}
+
+.restaurants-search-section {
+     
+    gap: 3%;
+    justify-content: center;
+}
+.main-header-content .row{
+    --bs-gutter-x: 0rem;
+}
+
+/* .restaurants-search-section input {
+
+} */
+.restaurants-search-section .form-control{
+    width: 32%;
+}
+
+
+/* ---------------------------------Container Section --------------------------- */
+
+.container-fluide {
+    width: 90%;
+    margin: 0 auto;
+    color: #192F60;
+}
+.container-fluide h2{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.container-fluide p{
+    font-size: 1.2rem;
+    
+}
+
+/* <!-------------------- Quick Search Items ------------------> */
+.container-menu-items {
+    display: flex;
+}
+.container-menu .row{
+    --bs-gutter-x: 0;
+}
+
+.item {
+    display: flex;
+    gap: 4%;
+
+}
+
+.item img {
+    width: 15vh;
+    height: auto;
+}
+
+.descp-item {
+    text-align: left;
+}
+
+
+/*------------------------ Responsive Code ------------------- */
+
+@media only screen and (max-width: 800px){
+    .nav-bar{
+        display: none;
+    }
+    .restaurants-search-section .form-control{
+        width: 86%;
+        margin: 13px;
+    }
+    header {
+        height: auto;
+    }
+    .header-container {
+        padding-top: 25px;
+        padding-bottom: 12px;
+    }
+    .container-fluide{
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 461px){
+    header {
+        background-image: linear-gradient(transparent, #000000c4), url(img/mHeader-bg.jpg);
+         /* background-size: 100%;
+        background-position: 100%; 
+        background-repeat: no-repeat;
+        margin-bottom: 6%;
+        height: auto  */
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 456px){
+    header {
+        background-image: linear-gradient(transparent, #000000c4), url(img/mHeader-bg.jpg);
+        /* background-size: 100%;
+        background-position: 100%; 
+        background-repeat: no-repeat;
+        margin-bottom: 6%;
+        height: auto  */
+        height: auto;
+    }
+    .restaurants-search-section .form-control{
+        width: 86%;
+        margin: 3px auto;
+    }
+    .main-header-content h1 {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 660px){
+    .descp-item p{
+        font-size: 1rem;
+    }
+}
