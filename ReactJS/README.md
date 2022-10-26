@@ -4,4 +4,4 @@ Create new issues if not available and fill this folder with code snippets writt
 
 - Create a new folder with your code snippet and add a README.md to this new folder.
 - Add possible explanations along with screenshots and inner working of this snippets
-- The snippet should be more than 60 lines of code.
+- The snippet should be more than 60 lines of code.1
