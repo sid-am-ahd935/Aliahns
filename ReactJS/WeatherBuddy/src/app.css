@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+hr{
+    opacity: 1;
+    margin: .8rem !important;
+}
+
+.all{
+    background-color: #306238;
+    width: 40%;
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 12px;
+    text-align: center;
+}
+
+body{
+    background-color: #c5ffcd !important;
+}
+
+.shadow-g{
+    box-shadow: 0 .5rem 1rem #306238 !important;
+}
+
+h1, h2, h4, h5{
+    margin: 0 !important;
+    color: darkseagreen;
+}
+
+.none{
+    border: none !important;
+}
+
+.view-card{
+    width: 100%;
+    text-align: center !important;
+    background-color: #306238 !important;
+}
+
+.view-card .heading img{
+    width: 25%;
+    border-radius: 50%;
+    background: #9f917f !important;
+}
+
+.heading h3{
+    color: #91d991;
+}
+
+.icon{
+    font-size: 30px;
+    color: #8bc28b;
+}
+
+.first, .second, .third, .fourth{
+    width: 100%;
+    justify-content: space-around;
+    margin: .7rem auto;
+}
+
+
+.tooltip_btn{
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-right: .8rem !important;
+
+}
+
+
+.search-card{
+    width: 100%;
+    color: white;
+    background-color: #306238 !important;
+    text-align: center;
+}
+
+.search-card .heading img{
+    border-radius: 50%;
+    width: 24%;
+}
+
+.search-card .heading h4{
+    color: darkseagreen;
+    font-family: cursive;
+    margin: 6%;
+}
+
+.search-card input{
+    margin: auto;
+    width: 50%;
+    background-color: darkseagreen;
+    border: none;
+    border-radius: 6px;
+    font-size: 22px;
+    padding: 5px;
+    text-align: center;
+    color: #1f3723;
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.search-card form .btn{
+    background-color: #8bc28b;
+    margin-left: 4%;
+    border: 2px solid #243c20;
+    color: #243c20;
+    font-weight: 500;
+}
+
+.search-card p{
+    color: #8bc28b;
+}
+
+
+@media screen and (max-width:1000px){
+    
+    .all{
+        width: 90%;
+    }
+}
