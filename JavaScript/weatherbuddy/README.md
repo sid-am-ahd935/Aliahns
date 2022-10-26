@@ -3,8 +3,8 @@
 
 <p align="center">
   <img src="/JavaScript/weatherbuddy/img/one.png" width="350" title="hover text">
-  <img src="/JavaScript/weatherbuddy/imgs/two.png" width="350" title="hover text">
-  <img src="/JavaScript/weatherbuddy/imgs/three.png" width="350" title="hover text">
-  <img src="/JavaScript/weatherbuddy/imgs/four.png" width="350" title="hover text">
-  <img src="/JavaScript/weatherbuddy/imgs/five.png" width="350" title="hover text">
+  <img src="/JavaScript/weatherbuddy/img/two.png" width="350" title="hover text">
+  <img src="/JavaScript/weatherbuddy/img/three.png" width="350" title="hover text">
+  <img src="/JavaScript/weatherbuddy/img/four.png" width="350" title="hover text">
+  <img src="/JavaScript/weatherbuddy/img/five.png" width="350" title="hover text">
 </p>
