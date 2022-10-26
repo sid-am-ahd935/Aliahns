@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("img/bg.jpg");
+    max-height: 100vh;
+}
+
+
+/* --------------main containt----------------  */
+.main-containt {
+    background-color: rgb(66 65 65 / 84%);
+    margin: 10%;
+    padding: 5%;
+    margin-bottom: 0;
+    border-radius: 15px;
+}
+
+/* <!-- ----------Search Area -------- --> */
+.search-area {
+    display: flex;
+    justify-content: center;
+}
+
+#cityName {
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 0 17px;
+    border: none;
+    text-align: center;
+
+}
+
+.btn {
+    color: white;
+    background-color: rgba(110, 110, 110, 0.489);
+    border-radius: 20px;
+}
+
+
+
+/* <!----------------- Main Content Area ---------- --> */
+
+#city,
+#cityTemp,
+#cityWeatherDescp,
+#cityHumidity,
+#cityWindSpeed {
+    color: white;
+    margin: 20px;
+    text-align: left;
+}
