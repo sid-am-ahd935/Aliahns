@@ -7,4 +7,6 @@ Create new issues if not available and fill this folder with code snippets writt
 - Add the Cython and Python snippets respectively.
 - Copy the main.py file inside your project folder and make the necessary changes in order to compare your Cython snippet with your Python snippet.
 - Add possible explanations along with screenshots and inner working of this snippets inside the README.md
-- The snippets should contain more than 50 lines of code.
+- The snippets should contain more than 50 lines of code except the main.py and README.md.
+
+### Look Into The Bubble Sort Folder For Proper Understanding
