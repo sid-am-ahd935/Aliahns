@@ -23,11 +23,11 @@ class Qr extends Component {
       });
     } else {
       Swal.fire({
-        position: "top-end",
+        //position: "top-end",
         icon: "success",
         title: "Welcome to work!",
-        // showConfirmButton: false,
-        // timer: 1500
+        showConfirmButton: false,
+        timer: 1500
       });
     }
   };
