@@ -7,3 +7,12 @@ I have made an employee card ,that contains some basic details. There is a QR at
 ![image](https://github.com/user-attachments/assets/0965cbff-f5f3-4ae1-829b-b4b73dedd752)
 
 ![image](https://github.com/user-attachments/assets/44d9e185-60d7-46f5-a0de-73307d1f569c)
+
+
+![Screenshot 2024-07-15 002631](https://github.com/user-attachments/assets/6c115b62-74e7-415b-8e42-8adaa03d72bf)
+
+
+
+
+https://github.com/user-attachments/assets/557c858a-57ae-4687-80bd-438ce0c5db3d
+
