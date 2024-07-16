@@ -1,0 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: #EEE;
+}
+.card{
+  height: 300px;
+}
+
+@media(max-width: 600px){
+  .card{
+    height: auto;
+    margin-top: 10px;
+    padding-bottom: 15px;
+}
+}
+
+
+.btn{
+  margin-top: 40px;
+  height: 40px;
+  width: 120px;
+  align-self: center;
+  background-color: rgb(220, 213, 213);
+  color: red;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.text{
+  font-family: "Open Sans", sans-serif;
+  font-size: 200px;
+}
+
+
+.text-center{
+  font-family: "Open Sans", sans-serif;
+}
+
+
+.card {
+  height: 380px; /* Increased height to accommodate images and text */
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card1{
+  width:100%;
+  background-color: rgb(255, 255, 255);
+  height: 60px;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+/*no font ,normal font*/
