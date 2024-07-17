@@ -1,0 +1,84 @@
+.container-fluid {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    border-radius: 1rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.card-title1 {
+    margin-top: 25px;
+    text-align: center;
+    
+}
+
+
+.card-title {
+    margin-top: 15px;
+    text-align: center;
+}
+
+
+.card-text {
+    margin-top: 5px;
+    text-align: center;
+    
+}
+
+.qr{
+    text-align: center;
+    background-color:#FEFBD8;
+    width: 126%;
+    height: 100px;
+}
+
+
+.first{
+    background-color:#987e9a;
+    width: 127%;
+    height: auto;
+}
+
+.second{
+    background-color:#BB9AB1;
+    width: 127%;
+    height: auto;
+}
+
+.third{
+    background-color:#EECEB9;
+    width: 126.5%;
+    height: auto;
+}
+
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -1px; /* Adjust to control the margin thickness */
+    left: -3px; /* Adjust to control the margin thickness */
+    right: -3px; /* Adjust to control the margin thickness */
+    bottom: -1px; /* Adjust to control the margin thickness */
+    background-color: #7d4980; /* Specific color for the margin */
+    z-index: -1; /* Ensure the pseudo-element is behind the card content */
+    border-radius: 1rem;
+}
