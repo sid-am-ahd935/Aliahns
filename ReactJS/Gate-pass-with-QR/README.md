@@ -1,5 +1,6 @@
 # Here is the explanation & screenshorts of working<br>
 
+
 Automated Gate Pass Management with QR Code Scanning and Voice Alerts functionalities.<br><br>
 
 I have made an employee card ,that contains some basic details. There is a QR at the below of the card. Scan the QR & if you are scanning it at 10 AM or between 12 Am-10 Am,you can see the message 'Welcome to work!" within an alert box. By any chance if you are late by 1 or more minutes then you can see the message "Sorry, you are late!" .<br><br>
@@ -30,6 +31,7 @@ Voice Alerts: Utilizes the SpeechSynthesisUtterance API to provide auditory feed
 
 ![Screenshot 2024-07-15 002631](https://github.com/user-attachments/assets/6c115b62-74e7-415b-8e42-8adaa03d72bf)
 
+
 previous<br>
 
 
@@ -43,7 +45,6 @@ updated<br>
 
 
 https://github.com/user-attachments/assets/15b6e684-b8d5-4828-97c7-45941fc6d0e8
-
 
 
 
