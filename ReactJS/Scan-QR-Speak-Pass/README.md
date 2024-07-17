@@ -18,3 +18,10 @@ Welcome Message: Displays "Welcome to work!" if the QR code is scanned at exactl
 Late Message: Displays "Sorry, you are late!" if scanned one minute or more past 10 AM.<br>
 Real-Time Feedback: Uses moment-timezone for accurate time calculations in the Asia/Kolkata timezone.<br>
 Voice Alerts: Utilizes the SpeechSynthesisUtterance API to provide auditory feedback corresponding to the displayed message.<br><br>
+
+# Here is the full video of working process
+
+
+
+https://github.com/user-attachments/assets/0e84a536-9768-42c5-b88f-84f6f449228d
+
