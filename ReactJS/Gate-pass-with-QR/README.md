@@ -30,10 +30,14 @@ Voice Alerts: Utilizes the SpeechSynthesisUtterance API to provide auditory feed
 
 ![Screenshot 2024-07-15 002631](https://github.com/user-attachments/assets/6c115b62-74e7-415b-8e42-8adaa03d72bf)
 
-
-
 previous<br>
-https://github.com/user-attachments/assets/557c858a-57ae-4687-80bd-438ce0c5db3d
+
+
+
+https://github.com/user-attachments/assets/11d60c4b-856b-4c72-8f26-2c38a74b2751
+
+
+
 
 
 
