@@ -1,0 +1,64 @@
+## Problem 22 : 
+
+```
+5 5 5 5 5 5 5 5 5 
+5 4 4 4 4 4 4 4 5 
+5 4 3 3 3 3 3 4 5 
+5 4 3 2 2 2 3 4 5 
+5 4 3 2 1 2 3 4 5 
+5 4 3 2 2 2 3 4 5 
+5 4 3 3 3 3 3 4 5 
+5 4 4 4 4 4 4 4 5 
+5 5 5 5 5 5 5 5 5
+```
+
+
+
+[!Practice Link :] (https://www.hackerrank.com/challenges/printing-pattern-2/problem)
+
+
+
+
+> CODE SOLUTION 
+
+
+
+## Approach for `pattern22 (English Solution)` 🚀
+
+- This function prints a **square pattern** of size `2*n-1` 📏.
+- For each cell, four distances are calculated based on `i` and `j`:
+  - 📍 **Distance from the top**: `i`
+  - 📍 **Distance from the bottom**: `2*n-2 - i`
+  - 📍 **Distance from the left**: `j`
+  - 📍 **Distance from the right**: `2*n-2 - j`
+  
+- The **minimum** of these four distances is taken 🧮, and `n - min()` is printed in that cell 🖨️. 
+- This ensures that the value **decreases symmetrically** 📉 as we move towards the center of the pattern 🎯.
+
+---
+
+
+
+## Approach for `pattern22 (Hinglish_Solution)`
+
+- Yeh function ek `2*n-1` size ka square pattern print karta hai.
+- Har cell ke liye, `i` aur `j` ke basis par 4 distances calculate hote hain: top, bottom, left, aur right.
+- Inn distances ka minimum leke, `n - min()` se jo value aati hai, woh us cell mein print hoti hai.
+- Har row ke baad `endl` se new line print hoti hai.
+
+
+```C++
+void pattern22(int n) {
+        for(int i=0;i<2*n-1;i++){
+            for(int j=0;j<2*n-1;j++){
+                int top=i,bottom=j;
+                int left=(2*n-2)-i,right=(2*n-2)-j;
+                cout<<n-(min(min(top,bottom),min(right,left)))<<" ";
+            }
+            cout<<endl;
+        }
+    }
+```
+
+> Thanks ♥️
+----------------
